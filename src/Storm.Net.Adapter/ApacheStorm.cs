@@ -95,14 +95,14 @@ namespace Storm
         /// <param name="message">stdout</param>
         public static void SendMsgToParent(string message)
         {
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             //fix output bug on mono.
             var encoding = new UTF8Encoding(false);
             Console.OutputEncoding = encoding;
             Console.WriteLine(message);
-            Console.WriteLine("end");
+            Console.WriteLine("\nend");
         }
 
         /// <summary>
@@ -113,9 +113,17 @@ namespace Storm
             string message = ReadMsg();
 
             StormConfigure configure = JsonConvert.DeserializeObject<StormConfigure>(message);
+            configure.pidDir = configure.pidDir ?? "./pid";
+            if (!Directory.Exists(configure.pidDir))
+            {
+                try
+                {
+                    Directory.CreateDirectory(configure.pidDir);
+                }
+                catch { }
+            }
 
-            if (!string.IsNullOrEmpty(configure.pidDir))
-                SendPid(configure.pidDir);
+            SendPid(configure.pidDir);
 
             config.StormConf = configure.conf;
 
@@ -239,7 +247,7 @@ namespace Storm
                 }
                 while (true);
 
-                string line = Encoding.UTF8.GetString(bytes.ToArray()).TrimEnd('\r');
+                string line = Encoding.UTF8.GetString(bytes.ToArray()).TrimEnd('\r', '\n');
 
                 if (string.IsNullOrEmpty(line))
                     Context.Logger.Error("Read EOF from stdin");
@@ -276,7 +284,7 @@ namespace Storm
 
         public static void Sync()
         {
-            SendMsgToParent(JsonConvert.SerializeObject(new{ command = "sync" }));
+            SendMsgToParent(JsonConvert.SerializeObject(new { command = "sync" }));
         }
 
         /// <summary>
@@ -287,8 +295,8 @@ namespace Storm
         {
             var currentProcess = Process.GetCurrentProcess();
             var pid = currentProcess.Id;
-            File.WriteAllText(heartBeatDir + "/" + pid.ToString(), "");
-            SendMsgToParent(JsonConvert.SerializeObject(new {pid=pid}));
+            File.WriteAllText(Path.Combine(heartBeatDir, pid.ToString()), pid.ToString());
+            SendMsgToParent(JsonConvert.SerializeObject(new { pid = pid }));
         }
     }
 
@@ -334,10 +342,7 @@ namespace Storm
                         long seqId = long.Parse(command.id);
                         this._spout.Fail(seqId);
                     }
-                    else
-                    {
-                        Context.Logger.Error("[Spout] unexpected message.");
-                    }
+
                     ApacheStorm.Sync();
                     stopwatch.Stop();
                 }
@@ -387,7 +392,7 @@ namespace Storm
             }
             catch (Exception ex)
             {
-                Context.Logger.Error(ex.ToString());
+                Context.Logger.Info(ex.ToString());
             }
         }
     }
