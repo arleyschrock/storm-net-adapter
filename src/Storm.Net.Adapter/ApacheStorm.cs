@@ -276,7 +276,7 @@ namespace Storm
 
         public static void Sync()
         {
-            SendMsgToParent("{\"command\": \"sync\"}");
+            SendMsgToParent(JsonConvert.SerializeObject(new{ command = "sync" }));
         }
 
         /// <summary>
@@ -285,10 +285,10 @@ namespace Storm
         /// <param name="heartBeatDir">the heart beat dir</param>
         private static void SendPid(string heartBeatDir)
         {
-            Process currentProcess = Process.GetCurrentProcess();
-            int pid = currentProcess.Id;
+            var currentProcess = Process.GetCurrentProcess();
+            var pid = currentProcess.Id;
             File.WriteAllText(heartBeatDir + "/" + pid.ToString(), "");
-            SendMsgToParent("{\"pid\": " + pid.ToString() + "}");
+            SendMsgToParent(JsonConvert.SerializeObject(new {pid=pid}));
         }
     }
 

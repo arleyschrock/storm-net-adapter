@@ -6,12 +6,12 @@
     <Description>A csharp adapter for apache storm.</Description>
     <AssemblyTitle>Storm.Net.Adapter</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.0.7</VersionPrefix>
+    <VersionPrefix>2.20.7.1</VersionPrefix>
     <Authors>Carey Tzou</Authors>
 	  <Company>Taikor</Company>
 	  <Copyright>Copyright © Taikor 2005-2017</Copyright>
     <AssemblyName>Storm.Net.Adapter</AssemblyName>
-    <PackageId>Storm.Net.Adapter</PackageId>
+    <PackageId>storm-net-adapter</PackageId>
     <PackageTags>storm;storm-net-adapter;Apache</PackageTags>
     <PackageReleaseNotes>add dotnet core support and fix some bugs.</PackageReleaseNotes>
     <PackageIconUrl>http://www.tnidea.com/media/image/storm-black.png</PackageIconUrl>
@@ -19,10 +19,10 @@
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
 	  <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.7</Version>
+    <Version>2.1.7</Version>
     <SignAssembly>False</SignAssembly>
     <RepositoryUrl>https://github.com/ziyunhx/storm-net-adapter</RepositoryUrl>
-    <FileVersion>2.0.7.1400</FileVersion>
+    <FileVersion>2.1.7</FileVersion>
 </PropertyGroup>
   
   <ItemGroup>
