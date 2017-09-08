@@ -8,12 +8,12 @@ namespace Storm
     {
         public override void Emit(List<object> values, string taskId = null)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public override void Emit(List<StormTuple> anchors, List<object> values, string taskId = null)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public override void Emit(List<object> values, long seqId, string taskId = null)
@@ -23,7 +23,7 @@ namespace Storm
 
         public override void Emit(string streamId, List<object> values, string taskId = null)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public override void Emit(string streamId, List<object> values, long seqId, string taskId = null)
@@ -45,17 +45,17 @@ namespace Storm
 
         public override void Emit(string streamId, List<StormTuple> anchors, List<object> tuple, string taskId = null)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public override void Ack(StormTuple tuple)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public override void Fail(StormTuple tuple)
         {
-            Context.Logger.Error("[SpoutContext] Bolt can not call this function!");
+            Context.Logger.Warn("[SpoutContext] Bolt can not call this function!");
         }
 
         public SpoutContext()

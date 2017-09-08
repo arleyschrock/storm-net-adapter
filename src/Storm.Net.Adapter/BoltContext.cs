@@ -17,7 +17,7 @@ namespace Storm
 
         public override void Emit(List<object> values, long seqId, string taskId = null)
         {
-            Context.Logger.Error("[BoltContext] Only Non-Tx Spout can call this function!");
+            Context.Logger.Warn("[BoltContext] Only Non-Tx Spout can call this function!");
         }
 
         public override void Emit(string streamId, List<object> values, string taskId = null)
@@ -27,7 +27,7 @@ namespace Storm
 
         public override void Emit(string streamId, List<object> values, long seqId, string taskId = null)
         {
-            Context.Logger.Error("[BoltContext] Only Non-Tx Spout can call this function!");
+            Context.Logger.Warn("[BoltContext] Only Non-Tx Spout can call this function!");
         }
 
         public override void Emit(string streamId, List<StormTuple> anchors, List<object> values, string taskId = null)

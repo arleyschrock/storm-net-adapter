@@ -424,7 +424,9 @@ namespace Storm
             {
                 StormTuple tuple = ApacheStorm.ReadTuple();
                 if (tuple.IsHeartBeatTuple())
+                {
                     ApacheStorm.Sync();
+                }
                 else
                 {
                     try
@@ -432,9 +434,11 @@ namespace Storm
                         this._bolt.Execute(tuple);
                         ApacheStorm.ctx.Ack(tuple);
                     }
-                    catch (Exception ex)
+                    catch (Exception e)
                     {
-                        Context.Logger.Error(ex.ToString());
+                        // This will cause the worker to get ejected. Do like below:
+                        // Context.Logger.Error(ex.ToString());
+                        Context.Logger.Warn($"{e.Message}\n+{e.StackTrace}");
                         ApacheStorm.ctx.Fail(tuple);
                     }
                 }
