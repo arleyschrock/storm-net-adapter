@@ -42,7 +42,7 @@ namespace Storm
                 }
             }
 
-            base.CheckOutputSchema(streamId, values == null ? 0 : values.Count);
+            //base.CheckOutputSchema(streamId, values == null ? 0 : values.Count);
 
             if (string.IsNullOrEmpty(taskId))
             {

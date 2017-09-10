@@ -153,7 +153,7 @@ namespace Storm
                         //verify the tuple.
                         if (stormCommand.tuple != null && stormCommand.tuple.Length > 0)
                         {
-                            ApacheStorm.ctx.CheckInputSchema(stormCommand.stream, stormCommand.tuple.Length);
+                            //ApacheStorm.ctx.CheckInputSchema(stormCommand.stream, stormCommand.tuple.Length);
                             for (int i = 0; i < stormCommand.tuple.Length; i++)
                             {
                                 stormCommand.tuple[i] = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(stormCommand.tuple[i]), ctx._schemaByCSharp.InputStreamSchema[stormCommand.stream][i]);
@@ -196,7 +196,7 @@ namespace Storm
                         //verify the tuple.
                         if (stormCommand.tuple != null && stormCommand.tuple.Length > 0)
                         {
-                            ApacheStorm.ctx.CheckInputSchema(stormCommand.stream, stormCommand.tuple.Length);
+                            //ApacheStorm.ctx.CheckInputSchema(stormCommand.stream, stormCommand.tuple.Length);
                             for (int i = 0; i < stormCommand.tuple.Length; i++)
                             {
                                 stormCommand.tuple[i] = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(stormCommand.tuple[i]), ctx._schemaByCSharp.InputStreamSchema[stormCommand.stream][i]);

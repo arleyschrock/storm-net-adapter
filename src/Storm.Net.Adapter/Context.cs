@@ -35,42 +35,6 @@ namespace Storm
         {
             this._schemaByCSharp = schema;
         }
-
-        internal void CheckOutputSchema(string streamId, int tupleFieldCount)
-        {
-            if (this._schemaByCSharp == null || this._schemaByCSharp.OutputStreamSchema == null)
-            {
-                Context.Logger.Warn(string.Format("[Context.generateProxyMessage()] NO output schema declared!", new object[0]));
-            }
-            if (!this._schemaByCSharp.OutputStreamSchema.ContainsKey(streamId))
-            {
-                Context.Logger.Warn(string.Format("[Context.generateProxyMessage()] NO output schema specified for {0}!", streamId));
-            }
-            if (this._schemaByCSharp.OutputStreamSchema[streamId].Count != tupleFieldCount)
-            {
-                Context.Logger.Warn(string.Format("[Context.generateProxyMessage()] out schema ({0} fields) MISMATCH with data ({1} fields) for streamId: {2}!", this._schemaByCSharp.OutputStreamSchema.Count, tupleFieldCount, streamId));
-            }
-        }
-        
-        internal void CheckInputSchema(string streamId, int tupleFieldCount)
-        {
-            if (this._schemaByCSharp == null)
-            {
-                Context.Logger.Warn("[Context.CheckInputSchema()] null schema");
-            }
-            if (this._schemaByCSharp.InputStreamSchema == null)
-            {
-                Context.Logger.Warn("[Context.CheckInputSchema()] null schema.InputStreamSchema");
-            }
-            if (!this._schemaByCSharp.InputStreamSchema.ContainsKey(streamId))
-            {
-                Context.Logger.Warn(string.Format("[Context.CheckInputSchema()] unkown streamId: {0}", streamId));
-            }
-            if (this._schemaByCSharp.InputStreamSchema[streamId].Count != tupleFieldCount)
-            {
-                Context.Logger.Warn(string.Format("[Context.CheckInputSchema()] count mismatch, streamId: {0}, SchemaFieldCount: {1}, tupleFieldCount: {2}", streamId, this._schemaByCSharp.InputStreamSchema[streamId].Count, tupleFieldCount));
-            }
-        }
     }
 
     public class ComponentStreamSchema

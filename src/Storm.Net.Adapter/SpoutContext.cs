@@ -28,8 +28,6 @@ namespace Storm
 
         public override void Emit(string streamId, List<object> values, long seqId, string taskId = null)
         {
-            base.CheckOutputSchema(streamId, values == null ? 0 : values.Count);
-
             if (string.IsNullOrEmpty(taskId))
             {
                 string msg = @"""command"": ""emit"", ""id"": ""{0}"", ""stream"": ""{1}"", ""tuple"": {2}";
